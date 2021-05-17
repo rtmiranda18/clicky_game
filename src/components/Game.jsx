@@ -1,55 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/game.scss';
 
 const Game = () => {
     const initImages = [
-        {
-            id: 0, name: 'cake.jpg'
-        },
-        {
-            id: 1, name: 'cookies.jpg'
-        },
-        {
-            id: 2, name: 'dumplings.jpg'
-        },
-        {
-            id: 3, name: 'fries.jpg'
-        },
-        {
-            id: 4, name: 'indianfood.jpg'
-        },
-        {
-            id: 5, name: 'kebab.jpg'
-        },
-        {
-            id: 6, name: 'lobsterrolls.jpg'
-        },
-        {
-            id: 7, name: 'pasta.jpg'
-        },
-        {
-            id: 8, name: 'pizza.png'
-        },
-        {
-            id: 9, name: 'ramen.jpg'
-        },
-        {
-            id: 10, name: 'sushi.jpg'
-        },
-        {
-            id: 11, name: 'tteokbokki.jpg'
-        }
+        'cake.jpg', 
+        'cookies.jpg', 
+        'dumplings.jpg', 
+        'fries.jpg', 
+        'indianfood.jpg',
+        'kebab.jpg',
+        'lobsterrolls.jpg',
+        'pasta.jpg',
+        'pizza.png',
+        'ramen.jpg',
+        'sushi.jpg',
+        'tteokbokki.jpg'
     ];
     const [images, setImages] = useState(initImages)
+    const shuffleImages = (images) => {
+        for (let i = images.length - 1; i > 0; i--) {
+            const newIndex = Math.floor(Math.random() * (i + 1));
+            [images[i], images[newIndex]] = [images[newIndex], images[i]];
+        }
+        console.log(images);
+        setImages(images)
+    } 
+    
+    // const newImages = shuffleImages(images)
+    useEffect(() => { setImages(images) }, [images])
     return (
       <div className="game">
         This is my game!
         <div className="images">
         {
-            images.map(image => 
-                <div className="image" key={image.id}>
+            images.map((image, index) => 
+                <div className="image" key={index} onClick={() => shuffleImages(images)}>
                     <div className="img">
-                        <img src={'./images/' + image.name} alt="food" />
+                        <img src={'./images/' + image} alt="food" />
                     </div>
                 </div>
             )
