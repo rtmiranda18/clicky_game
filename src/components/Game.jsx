@@ -41,7 +41,7 @@ const Game = () => {
     return (
       <div className="game">
         <h1>CLICKY GAME</h1> 
-        <h2>Score: {score}</h2>
+        <p>Score: {score}</p>
         <div className="images">
         {
             images.map((image, index) => 
