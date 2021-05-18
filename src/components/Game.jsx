@@ -40,7 +40,8 @@ const Game = () => {
     useEffect(() => { shuffleImages(images) }, [selected])
     return (
       <div className="game">
-        CLICKY GAME {score}
+        <h1>CLICKY GAME</h1> 
+        <h2>Score: {score}</h2>
         <div className="images">
         {
             images.map((image, index) => 
