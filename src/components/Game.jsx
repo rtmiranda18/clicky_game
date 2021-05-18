@@ -18,12 +18,15 @@ const Game = () => {
     ];
     const [images, setImages] = useState(initImages)
     const [selected, setSelected] = useState('')
+    const [score, setScore] = useState(0)
     const handleChanges = (selectedImage) => {
-        if(selected != selectedImage) {
-            setSelected(selectedImage) 
+        if(selected !== selectedImage) {
+            setSelected(selectedImage)
+            setScore(score + 1) 
         }
         else {
             setImages(initImages)
+            setScore(0)
         }
     }
     const shuffleImages = (images) => {
@@ -34,11 +37,10 @@ const Game = () => {
         setImages(images)
     } 
     
-    // const newImages = shuffleImages(images)
     useEffect(() => { shuffleImages(images) }, [selected])
     return (
       <div className="game">
-        CLICKY GAME
+        CLICKY GAME {score}
         <div className="images">
         {
             images.map((image, index) => 
