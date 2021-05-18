@@ -17,24 +17,32 @@ const Game = () => {
         'tteokbokki.jpg'
     ];
     const [images, setImages] = useState(initImages)
+    const [selected, setSelected] = useState('')
+    const handleChanges = (selectedImage) => {
+        if(selected != selectedImage) {
+            setSelected(selectedImage) 
+        }
+        else {
+            setImages(initImages)
+        }
+    }
     const shuffleImages = (images) => {
         for (let i = images.length - 1; i > 0; i--) {
             const newIndex = Math.floor(Math.random() * (i + 1));
             [images[i], images[newIndex]] = [images[newIndex], images[i]];
         }
-        console.log(images);
         setImages(images)
     } 
     
     // const newImages = shuffleImages(images)
-    useEffect(() => { setImages(images) }, [images])
+    useEffect(() => { shuffleImages(images) }, [selected])
     return (
       <div className="game">
-        This is my game!
+        CLICKY GAME
         <div className="images">
         {
             images.map((image, index) => 
-                <div className="image" key={index} onClick={() => shuffleImages(images)}>
+                <div className="image" key={index} onClick={() => handleChanges(image)}>
                     <div className="img">
                         <img src={'./images/' + image} alt="food" />
                     </div>
@@ -45,6 +53,7 @@ const Game = () => {
       </div>
     );
   }
+  
   
   export default Game;
   
